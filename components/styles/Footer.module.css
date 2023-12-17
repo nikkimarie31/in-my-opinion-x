@@ -1,0 +1,24 @@
+.footer {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  color: white;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+}
+
+.subscribeButton {
+  background-color: #32CD32; /* Neon green button */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.footer a {
+  color: #32CD32; /* Neon green links */
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

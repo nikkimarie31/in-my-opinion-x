@@ -1,3 +1,37 @@
+WELCOME TO IN MY OPINION X
+----------------------------
+This is my blog. My Name is Nicole Eddy I'm a Full Stack Web Developer and I'm here to share my journey and hopefully help someone or lots of people along their way to making a career out of the Technology Industry. Welcome and Enjoy!
+
+So I have redone my website probably 100 times by now. I have used "create-react-app", "create-next-app", "vite", and many others. I'm sticking with this one though. I hope. I used "npx create-next-app --example with-mongodb" to create this application. I'm going to continue to update this as I go and hopefully I don't forget. 
+
+NOTES
+-----
+
+
+
+
+
+
+
+
+
+TODO:Read documentation for dependabot -
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: "" # See documentation for possible values
+    directory: "/package.json" # Location of package manifests
+    schedule:
+      interval: "weekly"
+
+
+
+
+
 ## Example app using MongoDB
 
 [MongoDB](https://www.mongodb.com/) is a general purpose, document-based, distributed database built for modern application developers and for the cloud era. This example will show you how to connect to and use MongoDB as your backend for your Next.js app.

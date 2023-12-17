@@ -1,0 +1,65 @@
+/* header.module.css */
+
+/* AppBar Styling */
+.appBar {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0 2rem;
+}
+
+/* Toolbar Styling */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0 2rem;
+}
+
+/* Menu Button Styling */
+.menuButton {
+  color: #39ff14; /* Neon green for normal state */
+  margin-right: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.menuButton:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Slight dark background on hover */
+  color: #646cff; /* Change to another highlight color on hover */
+}
+
+/* Drawer Styling */
+.drawer {
+  width: 250px;
+  background-color: #2a2a2a; /* Dark background for contrast */
+  color: #39ff14; /* Neon green text */
+}
+
+/* Drawer List Item Styling */
+.drawerListItem {
+  margin: 10px 0;
+  padding: 10px 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.drawerListItem:hover {
+  background-color: #444; /* Darker shade on hover */
+  color: #39ff14; /* Maintain neon green color on hover */
+}
+
+.drawerListItemButton {
+  color: inherit; /* Inherit color from parent (neon green) */
+  text-align: start;
+  width: 100%;
+}
+
+/* Custom Drawer Styling */
+.customDrawer {
+  border-inline-end: none !important;
+}
+
+.title {
+  color: white;
+}
+
