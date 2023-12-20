@@ -1,0 +1,63 @@
+.contentSection {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: hwb(0 78% 2%);
+    font-weight: bolder;
+    text-shadow: 2px 2px 4px #171212;
+    background-color: rgba(0, 0, 0, 0.5);  /* Black overlay with 50% opacity */
+   
+    
+}
+
+.contentSectionSpeech {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: hwb(0 78% 2%);
+    font-weight: bolder;
+    text-shadow: 2px 2px 4px #171212;
+    background-color: rgba(0, 0, 0, 0.5);  /* Black overlay with 50% opacity */
+    border: 2px solid white;
+}
+
+.contentHeader {
+    font-size: 32px;
+    margin-block-end: 20px;
+}
+
+.paragraph {
+    text-indent: 2em;
+}
+
+.blockquote {
+    border-inline-end: 4px solid #646cff;
+    padding-inline-end: 20px;
+    font-style: italic;
+}
+
+.inlineLink {
+    display: inline;
+    color: #00aaff;
+    text-decoration: underline;
+}
+
+.inlineLink:hover {
+    color: #005577;
+}
+
+.freedomOfSpeech {
+padding: 40px;
+  
+}
+
+.freedomParagraph {
+    text-indent: 2em;
+    font-size: 18px;
+    line-height: 1.6;
+    padding: 20px;
+}

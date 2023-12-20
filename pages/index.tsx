@@ -1,10 +1,12 @@
 import Head from 'next/head';
 import clientPromise from '../lib/mongodb';
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next';
+import FreedomOfSpeechSection from '../components/FreedomOfSpeechSection';
+
 
 type ConnectionStatus = {
   isConnected: boolean;
-};
+ };
 
 export const getServerSideProps: GetServerSideProps<ConnectionStatus> = async () => {
   try {
@@ -15,6 +17,7 @@ export const getServerSideProps: GetServerSideProps<ConnectionStatus> = async ()
     return { props: { isConnected: false } };
   }
 };
+
 
 export default function Home({ isConnected }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
@@ -29,7 +32,11 @@ export default function Home({ isConnected }: InferGetServerSidePropsType<typeof
       ) : (
         <h2>You are NOT connected to MongoDB.</h2>
       )}
-     
+
+      <FreedomOfSpeechSection />
+
+
+
     </div>
   );
 }

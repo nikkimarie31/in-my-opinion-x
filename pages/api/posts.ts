@@ -18,9 +18,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         category: doc.category,
         datePosted: doc.datePosted,
         slug: doc.slug,
-        image: doc.image, // Include the image property
+        
         author: doc.author,
-        comments: doc.comments,
+
         images: doc.images, // Include the images property, assuming it's correctly formatted
         tags: doc.tags,   // Include the tags property
       }));

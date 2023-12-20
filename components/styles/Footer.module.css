@@ -1,10 +1,57 @@
 .footer {
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
   text-align: center;
   padding: 20px;
   position: relative;
 }
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+  }
+
+  .footer > div {
+    margin-bottom: 10px;
+    width: 100%; /* Full width for smaller screens */
+    max-width: 500px; /* Maximum width for elements */
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .footer img {
+    width: 80px; /* Smaller image size */
+  }
+
+  .footer h6, .footer a, .subscribeInput, .subscribeButton {
+    font-size: 0.9em; /* Smaller font size */
+  }
+
+  .subscribeInput, .subscribeButton {
+    width: 100%; /* Full width for input and button */
+    margin: 5px 0; /* Adjust margins */
+  }
+}
+
+/* Further adjustments for very small screens */
+@media (max-width: 480px) {
+  .footer h6, .footer a {
+    font-size: 0.8em;
+  }
+
+  .footer img {
+    width: 60px;
+  }
+}
+
 
 .subscribeButton {
   background-color: #32CD32; /* Neon green button */
@@ -15,10 +62,31 @@
   border-radius: 5px;
 }
 
+.subscribeInput {
+  padding: 10px;
+  margin-right: 10px;
+  border: 2px solid #32CD32; /* Neon green border */
+  border-radius: 5px;
+}
+
 .footer a {
   color: #32CD32; /* Neon green links */
 }
 
 .footer a:hover {
   text-decoration: underline;
+}
+
+.footer img {
+  max-width: 100px;
+  height: auto;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer a {
+  color: #32cd32;
+  margin-right: 10px;
 }
