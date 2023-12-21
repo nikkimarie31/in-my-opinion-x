@@ -1,0 +1,152 @@
+/* Blog.module.css */
+
+/* General Blog Styles */
+.blogPostContainer {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: black;
+    line-height: 1.6;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.blogPostTitle {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-block-end: 30px;
+    color: #39ff12;
+}
+
+.blogPostContent {
+    font-size: 1em;
+    color: cornsilk;
+    text-indent: 44px;
+    max-width: 800px;
+    margin-bottom: 30px;
+}
+
+.blogPostContent p {
+    margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.blogPostContent p:first-child {
+    text-indent: 0;
+}
+
+.blogPostContent h2, .blogPostContent h3 {
+    font-weight: bold;
+    margin-block-start: 30px;
+    margin-block-end: 15px;
+    color: #39ff14;
+}
+
+.blogPostContent img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 30px;
+}
+
+.blogPostContent ul, .blogPostContent ol {
+    margin-inline-end: 40px;
+    margin-block-end: 20px;
+}
+
+.blogPostContent li {
+    margin-block-end: 10px;
+}
+
+.blogPostContent a {
+    text-decoration: underline;
+    color: #39ff12;
+}
+
+.blogPostContent a:hover {
+    color: rgba(247, 7, 195, 0.648);
+}
+
+.blogPostContent blockquote {
+    border-left: 4px solid #39ff12;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    color: #ccc;
+}
+
+.blogPostContent pre, .blogPostContent code {
+    background-color: #282828;
+    color: #f8f8f2;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .blogPostContainer {
+        padding: 10px;
+    }
+
+    .blogPostTitle {
+        font-size: 2em;
+    }
+
+    .blogPostContent p {
+        font-size: 1em;
+    }
+}
+
+/* Blog.module.css */
+
+/* ... existing styles ... */
+
+.blogPostAuthor, .blogPostDate, .blogPostCategory {
+    font-size: 1em;
+    color: cornsilk;
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.blogPostAuthor {
+    font-style: italic;
+    color: #39ff14; /* Green color to match titles */
+}
+
+.blogPostDate {
+    color: #f8f8f2; /* Light color for visibility */
+}
+
+.blogPostCategory {
+    font-weight: bold;
+    color: #c7edcc; /* Light green for a subtle distinction */
+}
+
+.blogPostImages {
+    margin-top: 20px;
+    text-align: center; /* Center-align images if multiple */
+}
+
+.blogPostImage {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.error {
+    color: red;
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* ... any additional styles ... */
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    /* ... existing responsive styles ... */
+
+    .blogPostAuthor, .blogPostDate, .blogPostCategory {
+        font-size: 0.9em;
+    }
+}
+

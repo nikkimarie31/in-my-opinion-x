@@ -1,73 +1,51 @@
-import type { NextPage, GetServerSideProps, GetServerSidePropsContext } from 'next';
-import clientPromise from '../lib/mongodb';
+import styles from '../styles/blog.module.css'; // Ensure this path is correct
+import type { NextPage, GetServerSideProps } from 'next';
+import { fetchBlogPosts } from '../utils/fetchBlogPosts'; // Adjust the path as necessary
+import type { BlogPost } from '../types/BlogPost';
 
-
-type BlogPost = {
-    title: string;
-    excerpt: string;
-    content: string;
-    category: string;
-    datePosted: Date;
-    slug: string;
-    image?: [string];
-    author: string;
-    tags?: [string];
-  };
-  
-  type BlogProps = {
+type BlogProps = {
     posts: BlogPost[];
     error?: string;
-  };
-  
-  export const getServerSideProps: GetServerSideProps = async (context) => {
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
     try {
-      const client = await clientPromise;
-      const db = client.db('blog');
-      const documents = await db.collection('posts').find({}).toArray();
-      
-      const posts: BlogPost[] = documents.map(doc => ({
-      
-      
-        _id: doc._id.toString(), // Convert ObjectId to string
-      title: doc.title,
-        excerpt: doc.excerpt,
-        content: doc.content,
-        category: doc.category,
-        datePosted: doc.datePosted,
-        slug: doc.slug,
-        images: doc.images, // Assuming this is an array of image URLs
-        author: doc.author,
-        tags: doc.tags, // Assuming this is an array of tags
-        // ... map any other properties as needed
-      }));
-  
-      return { props: { posts } };
+        const posts = await fetchBlogPosts();
+        return { props: { posts } };
     } catch (e) {
-      console.error(e);
-      return { props: { posts: [], error: 'Failed to fetch posts' } };
+        console.error(e);
+        return { props: { posts: [], error: 'Failed to fetch posts' } };
     }
-  };
-  
-  
-  const Blog: NextPage<BlogProps> = ({ posts,error }) => {
-    console.log(posts);
+};
+
+const Blog: NextPage<BlogProps> = ({ posts, error }) => {
+    if (error) {
+        return <div className={styles.error}>Error loading posts: {error}</div>;
+    }
+
     return (
-      <div>
-        {posts.map((post: BlogPost, index: number) => (
-          <div key={index}>
-            <h2>{post.title}</h2>
-            <p>{post.excerpt}</p>
-            <p>{post.content}</p>
-            <p>{post.category}</p>
-            <p>{post.slug}</p>
-            <p>{post.image}</p>
-            <p>{post.author}</p>
-           <p>{post.datePosted ? post.datePosted.toDateString() : 'Date not available'}</p>
-          </div>
-        ))}
-      </div>
+        <div className={styles.blogPostContainer}>
+            {posts.map((post, index) => (
+                <article key={index}>
+                    <h2 className={styles.blogPostTitle}>{post.title}</h2>
+                    <div className={styles.blogPostContent} dangerouslySetInnerHTML={{ __html: post.content }}></div>
+                    <p className={styles.blogPostAuthor}>Author: {post.author}</p>
+                    <p className={styles.blogPostDate}>Posted on: {post.datePosted.toDateString()}</p>
+                    <p className={styles.blogPostCategory}>Category: {post.category}</p>
+                    <div className={styles.blogPostImages}>
+                        {post.images && post.images.map((image, idx) => (
+                            <img key={idx} src={image} alt={`Image ${idx}`} className={styles.blogPostImage} />
+                        ))}
+                    </div>
+                    <div className={styles.blogPostTags}>
+                        {post.tags && post.tags.map((tag, idx) => (
+                            <span key={idx} className={styles.blogPostTag}>{tag}</span>
+                        ))}
+                    </div>
+                </article>
+            ))}
+        </div>
     );
-  };
-  
-  export default Blog;
-  
+};
+
+export default Blog;
