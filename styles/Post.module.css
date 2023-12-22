@@ -82,3 +82,44 @@
     font-style: italic;
     margin-bottom: 1em;
 }
+
+.postContent pre {
+    background-color: #282c34; /* Dark background for code blocks */
+    color: #abb2bf; /* Light grey text */
+    padding: 16px;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 20px 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.postContent code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95em;
+    /* Styles for inline code */
+}
+
+.postContent .token.keyword {
+    color: #c678dd;
+}
+.postContent .token.operator {
+    color: #56b6c2;
+}
+.postContent .token.string {
+    color: #98c379;
+}
+
+.postContent h2, .postContent h3 {
+    color: #0056b3; /* Example: dark blue for better readability */
+    margin-top: 1.2rem;
+    margin-bottom: 0.6em;
+}
+
+/* Styling for tips or important notes */
+.postContent .tip {
+    background-color: #f0f4c3; /* Light background for tips */
+    border-left: 5px solid #ffc107; /* Highlight line */
+    padding: 10px 15px;
+    margin: 20px 0;
+    font-style: italic;
+}

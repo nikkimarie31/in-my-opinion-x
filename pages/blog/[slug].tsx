@@ -2,14 +2,21 @@ import { GetServerSideProps, NextPage } from 'next';
 import styles from '../../styles/Post.module.css';
 import { fetchPostBySlug } from '../../utils/fetchPostBySlug';
 import { BlogPost } from '../../types/BlogPost';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-okaidia.css';
+import { useEffect } from 'react';
 
 type PostPageProps = {
     post: BlogPost;
 };
 
 const PostPage: NextPage<PostPageProps> = ({ post }) => {
+    useEffect(() => {
+        Prism.highlightAll();
+    }, []);
+
     if (!post) {
-        return <div>Loading...</div>; // Or handle the "not found" state differently
+        return <div>Loading...</div>; 
     }
 
     return (
@@ -20,7 +27,7 @@ const PostPage: NextPage<PostPageProps> = ({ post }) => {
             {post.images && post.images.map((image, index) => (
                 <img key={index} src={image} alt={`Image ${index}`} className={styles.postImage} />
             ))}
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            <div className="postContent" dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
     );
 };
