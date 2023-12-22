@@ -1,0 +1,84 @@
+/* Post.module.css */
+.postContainer {
+    /* Container for the individual post */
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.postTitle {
+    /* Style for the blog post title */
+    color: #333;
+    font-size: 2em;
+}
+
+.postMeta {
+    /* Style for metadata (author, date) */
+    color: #666;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.postContent {
+    /* Main content of the blog post */
+    font-size: 1em;
+    line-height: 1.6;
+    color: #333;
+}
+
+.postContent h2, .postContent h3 {
+    color: #39ff14;
+    margin-top: 1rem;
+    margin-bottom: 0.5em;
+}
+
+.postContent p {
+    margin-bottom: 1em;
+}
+
+.postContent code {
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    padding: 3px 6px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95em;
+}
+
+.postContent pre {
+    background-color: #272822; /* Dark background for code blocks */
+    color: #f8f8f2;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+.postContent img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+}
+
+.postImage {
+    /* Style for images in the post */
+    max-width: 100%;
+    height: auto;
+    margin-top: 15px;
+}
+
+/* Post.module.css */
+.author, .datePosted {
+    font-size: 0.9em;
+    color: #666; /* Subtle color for metadata */
+    margin-bottom: 0.5em;
+}
+
+.author {
+    font-weight: bold;
+    color: #39ff14; /* Neon green to make the author's name stand out */
+}
+
+.datePosted {
+    font-style: italic;
+    margin-bottom: 1em;
+}

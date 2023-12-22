@@ -63,3 +63,15 @@
   color: white;
 }
 
+.navButton {
+  background-color: #282828;
+  color: #39ff12;
+  border: 1px solid #39ff12;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+}

@@ -1,15 +1,33 @@
-import { useState, FunctionComponent } from 'react';
-import Link from 'next/link';  // Corrected import for Next.js Link
+import { useState, useEffect, FunctionComponent } from 'react';
+import Link from 'next/link';
 import { AppBar, IconButton, Drawer, List, ListItem, Toolbar, Typography, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import styles from './styles/Header.module.css';
 
 const Header: FunctionComponent = () => {
     const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+    const [categories, setCategories] = useState<string[]>([]);
+
+    useEffect(() => {
+        const loadCategories = async () => {
+            try {
+                const response = await fetch('/api/categories');
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+                const data = await response.json();
+                setCategories(data);
+            } catch (error) {
+                console.error('Failed to fetch categories', error);
+            }
+        };
+        loadCategories();
+    }, []);
 
     const toggleDrawer = (open: boolean) => {
         setDrawerOpen(open);
     };
+
 
     return (
         <>
@@ -21,15 +39,25 @@ const Header: FunctionComponent = () => {
                     <Typography className={styles.title} variant='h6'>
                         In My Opinion
                     </Typography>
+                    <div>
+                        {
+                            categories.map((category, index) => (
+                                <Link key={index} href={`/category/${category}`} passHref>
+                                    <Button className={styles.navButton}>{category}</Button>
+                                </Link>
+                            ))
+                        }
+
+                    </div>
                 </Toolbar>
             </AppBar>
-            <Drawer 
-                open={drawerOpen} 
-                onClose={() => toggleDrawer(false)} 
+            <Drawer
+                open={drawerOpen}
+                onClose={() => toggleDrawer(false)}
                 PaperProps={{ style: { borderRight: 'none' } }}
                 className={styles.drawer}
             >
-                <List> 
+                <List>
                     {['/', '/about', '/blog', '/flexbox', '/credentials', '/contact', '/privacy-policy'].map((path, index) => (
                         <ListItem key={index} className={styles.drawerListItem} onClick={() => toggleDrawer(false)}>
                             <Link href={path} passHref>

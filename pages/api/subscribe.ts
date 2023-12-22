@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const client = await clientPromise;
-    const db = client.db("yourDatabaseName"); // Replace with your actual database name
+    const db = client.db("blog"); // Replace with your actual database name
     const { email } = req.body;
 
     if (!email || !email.includes('@')) {
