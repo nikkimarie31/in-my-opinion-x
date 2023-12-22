@@ -7,7 +7,7 @@ import { BlogPost } from '../types/BlogPost';
 import { GetServerSideProps } from 'next';
 import { fetchBlogPosts } from '../utils/fetchBlogPosts';
 import { NextPage } from 'next';
-
+import clientPromise from '../lib/mongodb';
 
 type BlogProps = {
     initialPosts: BlogPost[];
@@ -17,29 +17,51 @@ type BlogProps = {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const page = parseInt(context.query.page as string) || 1;
-    const categories = await fetchCategories();
-    const posts = await fetchBlogPosts(page);
-    const totalPages = 5; // Replace with actual logic to calculate total pages
+    const limit = 3;
 
-    return { props: { initialPosts: posts, categories, totalPages } };
+    const categories = await fetchCategories();
+    const posts = await fetchBlogPosts(page, limit);
+
+    const client = await clientPromise;
+    const db = client.db('blog');
+    const totalPosts = await db.collection('posts').countDocuments();
+
+
+    const totalPages = Math.ceil(totalPosts / limit);
+
+    return { 
+        props: { 
+            initialPosts: posts, 
+            categories, 
+            totalPages 
+        } 
+    };
 };
 
 const Blog: NextPage<BlogProps> = ({ initialPosts, categories, totalPages }) => {
     const [currentPage, setCurrentPage] = useState(1);
+    const [selectedCategories, setSelectedCategories] = useState<string | null>(null);
     const [posts, setPosts] = useState(initialPosts);
+    
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const newPosts = await fetchBlogPosts(currentPage);
-            const formattedPosts = newPosts.map(post => ({...post,
-            datePosted: new Date(post.datePosted)}));
-            setPosts(formattedPosts);
+            let url = `/api/posts?page=${currentPage}`;
+            if (selectedCategories) {
+                url += `&category=${selectedCategories}`;
+            }
+            const response = await fetch(url);
+            const newPosts: BlogPost[] = await response.json();
+            setPosts(newPosts);
         };
 
-        if (currentPage !== 1) {
-            fetchPosts();
-        }
-    }, [currentPage]);
+        fetchPosts();
+    }, [currentPage, selectedCategories]);
+
+    const handleCategoriesClick = (categories: string) => {
+        setSelectedCategories(categories);
+        setCurrentPage(1);
+    }
 
     const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
@@ -47,10 +69,14 @@ const Blog: NextPage<BlogProps> = ({ initialPosts, categories, totalPages }) => 
 
     return (
         <div className={styles.blogContainer}>
+       
             <h1>In My Opinion Blog</h1>
+        
             <div className={styles.categoryContainer}>
                 {categories.map((category: string, index: number) => (
-                    <button key={index} className={styles.categoryButton}>
+                    <button key={index} className={styles.categoryButton}
+                    onClick={() => handleCategoriesClick(category)}
+                    >
                         {category}
                     </button>
                 ))}

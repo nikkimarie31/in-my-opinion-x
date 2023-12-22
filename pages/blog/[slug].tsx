@@ -1,23 +1,15 @@
-// pages/blog/[slug].tsx
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { GetServerSideProps, NextPage } from 'next';
 import styles from '../../styles/Post.module.css';
 import { fetchPostBySlug } from '../../utils/fetchPostBySlug';
 import { BlogPost } from '../../types/BlogPost';
 
-const PostPage = () => {
-    const router = useRouter();
-    const { slug } = router.query;
-    const [post, setPost] = useState<BlogPost | null>(null);
+type PostPageProps = {
+    post: BlogPost;
+};
 
-    useEffect(() => {
-        if (typeof slug === 'string') {
-            fetchPostBySlug(slug).then(data => setPost(data));
-        }
-    }, [slug]);
-
+const PostPage: NextPage<PostPageProps> = ({ post }) => {
     if (!post) {
-        return <div>Loading...</div>;
+        return <div>Loading...</div>; // Or handle the "not found" state differently
     }
 
     return (
@@ -31,6 +23,20 @@ const PostPage = () => {
             <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </div>
     );
+};
+
+export const getServerSideProps: GetServerSideProps<PostPageProps> = async (context) => {
+    const slug = context.params?.slug;
+
+    if (typeof slug === 'string') {
+        const post = await fetchPostBySlug(slug);
+        if (!post) {
+            return { notFound: true }; // Redirect to 404 page if post not found
+        }
+        return { props: { post } };
+    }
+
+    return { notFound: true };
 };
 
 export default PostPage;
