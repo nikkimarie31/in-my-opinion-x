@@ -1,3 +1,4 @@
+import React from 'react';
 import { GetServerSideProps, NextPage } from 'next';
 import styles from '../../styles/Post.module.css';
 import { fetchPostBySlug } from '../../utils/fetchPostBySlug';
@@ -13,11 +14,15 @@ type PostPageProps = {
 const PostPage: NextPage<PostPageProps> = ({ post }) => {
     useEffect(() => {
         Prism.highlightAll();
-    }, []);
+    }, [post]);
 
     if (!post) {
         return <div>Loading...</div>; 
     }
+
+    const formattedContent = (content: string) => content.split('\n\n').map((paragraph, index) => (
+        <p key={index}>{paragraph}</p>
+    ));
 
     return (
         <div className={styles.postContainer}>
@@ -27,7 +32,9 @@ const PostPage: NextPage<PostPageProps> = ({ post }) => {
             {post.images && post.images.map((image, index) => (
                 <img key={index} src={image} alt={`Image ${index}`} className={styles.postImage} />
             ))}
-            <div className="postContent" dangerouslySetInnerHTML={{ __html: post.content }} />
+            <div className="postContent">
+                {formattedContent(post.content)}
+            </div>
         </div>
     );
 };
@@ -38,7 +45,7 @@ export const getServerSideProps: GetServerSideProps<PostPageProps> = async (cont
     if (typeof slug === 'string') {
         const post = await fetchPostBySlug(slug);
         if (!post) {
-            return { notFound: true }; // Redirect to 404 page if post not found
+            return { notFound: true };
         }
         return { props: { post } };
     }

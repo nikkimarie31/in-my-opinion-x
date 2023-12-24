@@ -1,5 +1,5 @@
 // pages/blog.tsx
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from '../styles/blog.module.css';
 import { fetchCategories } from '../utils/fetchCategories'; // Adjust the import paths
