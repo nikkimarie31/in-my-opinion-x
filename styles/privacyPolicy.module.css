@@ -1,0 +1,55 @@
+.privacyPolicyContainer {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: black;
+}
+
+.privacyPolicyContainer h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    color: #39ff14;
+    font-style: italic;
+    
+}
+
+.privacyPolicyContainer h3 {
+    font-size: 1.5em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    color: #39ff14;
+    font-style: italic;
+    padding: 20px;
+}
+
+.privacyPolicyContainer p {
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 1.6;
+    padding: 10px;
+    text-indent: 55px;
+    text-shadow: 10px 10px 15px white;
+    color: #eee7e7; /* or any color that suits your site's theme */
+}
+
+.privacyPolicyContainer ul, .privacyPolicyContainer ol {
+    padding-left: 20px;
+    margin-bottom: 1em;
+}
+
+.privacyPolicyContainer a {
+    color: #007bff; /* or your theme's link color */
+    text-decoration: underline;
+}
+.privacyPolicyContainer a:hover {
+    color: #0056b3; /* darker shade for hover state */
+}
+
+
+
+@media (max-width: 600px) {
+    .privacyPolicyContainer {
+        padding: 10px;
+    }
+}
+
