@@ -6,7 +6,13 @@ export const fetchBlogPosts = async (page: number = 1, limit: number = 3): Promi
     const client = await clientPromise;
     const db = client.db('blog');
     const skip = (page - 1) * limit;
-    const documents = await db.collection('posts').find({}).skip(skip).limit(limit).toArray();
+ 
+
+    const documents = await db.collection('posts').find({})
+            .sort({ datePosted: -1 })
+            .skip(skip)
+            .limit(limit)
+            .toArray();
 
     return documents.map(doc => ({
         _id: doc._id.toString(),

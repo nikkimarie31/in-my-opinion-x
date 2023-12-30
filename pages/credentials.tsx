@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './credentialsPage.module.css';
+import styles from '../styles/credentials.module.css';
 
 const CredentialsPage: React.FC = () => {
   return (
