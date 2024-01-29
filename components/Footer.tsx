@@ -10,8 +10,14 @@ const Footer: React.FC = () => {
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
+  const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
 
   const handleSubscribe = async () => {
+    if (!emailRegex.test(email)) {
+      setMessage('Please enter in a valid email');
+      setIsError(true);
+      return;
+    }
     try {
       const response = await fetch('/api/subscribe', {
         method: 'POST',

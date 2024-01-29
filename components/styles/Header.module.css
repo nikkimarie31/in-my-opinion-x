@@ -21,13 +21,21 @@
 .menuButton {
   color: #39ff14; /* Neon green for normal state */
   margin-right: 20px;
+  position: absolute;
+  right: 1100px;
+  left: 1px;
+  align-items: start;
   transition: background-color 0.3s, color 0.3s;
 }
+
+
 
 .menuButton:hover {
   background-color: rgba(0, 0, 0, 0.1); /* Slight dark background on hover */
   color: #646cff; /* Change to another highlight color on hover */
 }
+
+
 
 /* Drawer Styling */
 .drawer {

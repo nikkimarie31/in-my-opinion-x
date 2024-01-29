@@ -15,51 +15,62 @@ type BlogProps = {
     totalPages: number;
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps<BlogProps> = async (context) => {
+    const category = context.query.category as string;
     const page = parseInt(context.query.page as string) || 1;
     const limit = 3;
 
-    const categories = await fetchCategories();
-    const posts = await fetchBlogPosts(page, limit);
+    try {
+        // Assuming fetchBlogPosts and fetchCategories are your utility functions for fetching data
+        const posts = await fetchBlogPosts(page, limit, category);
+        const categories = await fetchCategories();
 
-    const client = await clientPromise;
-    const db = client.db('blog');
-    const totalPosts = await db.collection('posts').countDocuments();
+        // Assuming clientPromise is your MongoDB connection and posts collection exists
+        const client = await clientPromise;
+        const db = client.db('blog');
+        const totalPosts = await db.collection('posts').countDocuments();
+        const totalPages = Math.ceil(totalPosts / limit);
 
-
-    const totalPages = Math.ceil(totalPosts / limit);
-
-    return { 
-        props: { 
-            initialPosts: posts, 
-            categories, 
-            totalPages 
-        } 
-    };
+        return { 
+            props: { 
+                initialPosts: posts, 
+                categories, 
+                totalPages 
+            } 
+        };
+    } catch (error) {
+        console.error('Error in getServerSideProps:', error);
+        return { 
+            props: { 
+                initialPosts: [], 
+                categories: [], 
+                totalPages: 0 
+            } 
+        };
+    }
 };
 
 const Blog: NextPage<BlogProps> = ({ initialPosts, categories, totalPages }) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [selectedCategories, setSelectedCategories] = useState<string | null>(null);
-    const [posts, setPosts] = useState(initialPosts);
-    
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+    const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
 
     useEffect(() => {
         const fetchPosts = async () => {
             let url = `/api/posts?page=${currentPage}`;
-            if (selectedCategories) {
-                url += `&category=${selectedCategories}`;
+            if (selectedCategory) {
+                url += `&category=${selectedCategory}`;
             }
             const response = await fetch(url);
-            const newPosts: BlogPost[] = await response.json();
+            const newPosts = await response.json();
             setPosts(newPosts);
         };
 
         fetchPosts();
-    }, [currentPage, selectedCategories]);
+    }, [currentPage, selectedCategory]);
 
-    const handleCategoriesClick = (categories: string) => {
-        setSelectedCategories(categories);
+    const handleCategoryClick = (category: string) => {
+        setSelectedCategory(category);
         setCurrentPage(1);
     }
 
@@ -69,20 +80,20 @@ const Blog: NextPage<BlogProps> = ({ initialPosts, categories, totalPages }) => 
 
     return (
         <div className={styles.blogContainer}>
-       
             <h1>In My Opinion Blog</h1>
-        
             <div className={styles.categoryContainer}>
-                {categories.map((category: string, index: number) => (
-                    <button key={index} className={styles.categoryButton}
-                    onClick={() => handleCategoriesClick(category)}
+                {categories.map((category, index) => (
+                    <button 
+                        key={index} 
+                        className={styles.categoryButton}
+                        onClick={() => handleCategoryClick(category)}
                     >
                         {category}
                     </button>
                 ))}
             </div>
             <div className={styles.postsContainer}>
-                {posts.map((post: BlogPost) => (
+                {posts.map((post) => (
                     <div key={post._id} className={styles.postPreview}>
                         <h2>{post.title}</h2>
                         <p>{post.excerpt}</p>

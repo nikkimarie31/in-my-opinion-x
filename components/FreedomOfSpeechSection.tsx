@@ -8,9 +8,9 @@ const FreedomOfSpeechSection: React.FC = () => {
             <blockquote className={styles.blockquote}>
                 "Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press..."
             </blockquote>
-            <p>
+            <footer className={styles.freedomFooter}>
                 - United States Constitution, First Amendment
-            </p>
+            </footer>
             <p className={styles.freedomParagraph}>
                 The views and opinions expressed on this website are my own and do not reflect the views of any organization or entity. I believe in the importance of freedom of speech as outlined in the First Amendment and strive to share my perspectives respectfully and responsibly.
             </p>

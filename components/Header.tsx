@@ -1,5 +1,5 @@
 
-import React, { useState, FunctionComponent } from 'react';
+import React, { useState, FunctionComponent, useCallback } from 'react';
 import Link from 'next/link';
 import { AppBar, IconButton, Drawer, List, ListItem, Toolbar, Typography, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -9,9 +9,10 @@ const Header: FunctionComponent = () => {
     const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
     
 
-    const toggleDrawer = (open: boolean) => {
+    const toggleDrawer = 
+    useCallback((open: boolean) => {
         setDrawerOpen(open);
-    };
+    }, []);
 
 
     return (

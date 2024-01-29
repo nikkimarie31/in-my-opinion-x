@@ -1,5 +1,8 @@
+// pages/api/subscribe.ts
+
 import type { NextApiRequest, NextApiResponse } from 'next';
-import clientPromise from '../../lib/mongodb'; // Adjust the path to your MongoDB client instance
+import { MongoClient, MongoClientOptions } from 'mongodb';
+import clientPromise from '../../lib/mongodb';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -11,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const db = client.db("blog"); // Replace with your actual database name
     const { email } = req.body;
 
-    if (!email || !email.includes('@')) {
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
       throw new Error('Invalid email address');
     }
 

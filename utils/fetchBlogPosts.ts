@@ -1,20 +1,27 @@
-// utils/fetchBlogPosts.ts
 import clientPromise from '../lib/mongodb';
 import { BlogPost } from '../types/BlogPost';
 
-export const fetchBlogPosts = async (page: number = 1, limit: number = 3): Promise<BlogPost[]> => {
+export const fetchBlogPosts = async (page: number = 1, limit: number = 3, category?: string): Promise<BlogPost[]> => {
     const client = await clientPromise;
     const db = client.db('blog');
     const skip = (page - 1) * limit;
  
+    let query = {};
+    if (category) {
+        query = {...query, category};
+    }
 
-    const documents = await db.collection('posts').find({})
+    
+    
+    
+    const documents = await db.collection ('posts').find(query)
+
             .sort({ datePosted: -1 })
             .skip(skip)
             .limit(limit)
             .toArray();
 
-    return documents.map(doc => ({
+    return  documents.map(doc => ({
         _id: doc._id.toString(),
         title: doc.title,
         excerpt: doc.excerpt,
@@ -26,4 +33,5 @@ export const fetchBlogPosts = async (page: number = 1, limit: number = 3): Promi
         tags: doc.tags,
         author: doc.author
     }));
+    
 };
