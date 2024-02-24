@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles/freedomOfSpeech.module.css';
+import styles from './styles/freedomOfSpeech.module.css'
 
 const FreedomOfSpeechSection: React.FC = () => {
     return (

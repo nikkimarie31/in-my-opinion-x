@@ -26,7 +26,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "snappy": "^7.2.2",
-    "three": "^0.159.0"
+    "three": "^0.159.0",
+    "yarn": "^1.22.21"
   },
   "devDependencies": {
     "@types/node": "18.7.5",
