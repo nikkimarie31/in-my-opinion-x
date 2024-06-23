@@ -1,8 +1,7 @@
-// pages/blog.tsx
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from '../styles/blog.module.css';
-import { fetchCategories } from '../utils/fetchCategories'; // Adjust the import paths
+import { fetchCategories } from '../utils/fetchCategories'; 
 import { BlogPost } from '../types/BlogPost';
 import { GetServerSideProps } from 'next';
 import { fetchBlogPosts } from '../utils/fetchBlogPosts';
@@ -21,13 +20,12 @@ export const getServerSideProps: GetServerSideProps<BlogProps> = async (context)
     const limit = 3;
 
     try {
-        // Assuming fetchBlogPosts and fetchCategories are your utility functions for fetching data
+        const client = await clientPromise;
+        const db = client.db('blog');
+
         const posts = await fetchBlogPosts(page, limit, category);
         const categories = await fetchCategories();
 
-        // Assuming clientPromise is your MongoDB connection and posts collection exists
-        const client = await clientPromise;
-        const db = client.db('blog');
         const totalPosts = await db.collection('posts').countDocuments();
         const totalPages = Math.ceil(totalPosts / limit);
 
@@ -72,7 +70,7 @@ const Blog: NextPage<BlogProps> = ({ initialPosts, categories, totalPages }) => 
     const handleCategoryClick = (category: string) => {
         setSelectedCategory(category);
         setCurrentPage(1);
-    }
+    };
 
     const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
@@ -108,7 +106,7 @@ const Blog: NextPage<BlogProps> = ({ initialPosts, categories, totalPages }) => 
                     <button
                         key={index + 1}
                         onClick={() => handlePageChange(index + 1)}
-                        className={styles.paginationButton}
+                        className={`${styles.paginationButton} ${currentPage === index + 1 ? styles.currentPage : ''}`}
                         disabled={currentPage === index + 1}
                     >
                         {index + 1}

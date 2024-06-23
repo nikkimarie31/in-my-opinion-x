@@ -9,7 +9,7 @@ const PrivacyPolicy: React.FC = () => {
             </header>
 
             <section>
-                <h3>Introduction</h3>
+                <h3>Introduction to Privacy Policy</h3>
                 <p>Welcome to In My Opinion. We are committed to protecting the privacy of our visitors and users. This Privacy Policy outlines our practices concerning the collection, use, and disclosure of your personal information.</p>
             </section>
 

@@ -1,42 +1,21 @@
-// pages/_app.tsx
-
 import { AppProps } from 'next/app';
-import React from 'react';
-import MongoDB from '../lib/mongodb';
-import Header from '../components/Header'; 
-import Footer from '../components/Footer';
+import clientPromise from '../lib/mongodb';
+import { MongoClient } from 'mongodb';
 
-const App: React.FC<AppProps> = ({ Component, pageProps }) => {
-  // Create MongoDB instance
-  const mongoDBInstance = MongoDB.getInstance();
+function MyApp({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />;
+}
 
-  // Connect to MongoDB on application startup
-  React.useEffect(() => {
-    const connectToMongoDB = async () => {
-      try {
-        await mongoDBInstance.connect();
-      } catch (error) {
-        console.error('Failed to connect to MongoDB:', error);
-      }
-    };
+MyApp.getInitialProps = async () => {
+  try {
+    const client: MongoClient = await clientPromise;
+    const db = client.db();
+    console.log('Connected to MongoDB:', db.databaseName);
+  } catch (e) {
+    console.error('Error connecting to MongoDB:', e);
+  }
 
-    connectToMongoDB();
-
-
-    return () => {
-      mongoDBInstance.close();
-    };
-  }, []);
-
-  return (
-  <>
-  <Header />
-   <Component {...pageProps} />;
-  
-  <Footer />
-  
-  </>
-  ) 
+  return {};
 };
 
-export default App;
+export default MyApp;

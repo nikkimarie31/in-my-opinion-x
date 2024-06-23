@@ -2,7 +2,11 @@
     "cSpell.words": [
         "fontawesome",
         "fortawesome",
+        "msvc",
         "prismjs",
         "zstd"
+    ],
+    "cSpell.ignoreWords": [
+        "napi"
     ]
 }

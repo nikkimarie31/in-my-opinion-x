@@ -1,4 +1,3 @@
-import React from 'react';
 import { GetServerSideProps, NextPage } from 'next';
 import styles from '../../styles/Post.module.css';
 import { fetchPostBySlug } from '../../utils/fetchPostBySlug';
@@ -24,8 +23,6 @@ const PostPage: NextPage<PostPageProps> = ({ post }) => {
         <p key={index}>{paragraph}</p>
     ));
 
-   
-
     return (
         <div className={styles.postContainer}>
             <h1>{post.title}</h1>
@@ -36,12 +33,8 @@ const PostPage: NextPage<PostPageProps> = ({ post }) => {
             ))}
             <div className="postContent">
                 {formattedContent(post.content)}
-
-                console.log(typeof datePosted);
             </div>
         </div>
-
-        
     );
 };
 

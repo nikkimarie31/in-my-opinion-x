@@ -1,14 +1,14 @@
-// utils/fetchPostBySlug.ts
-import clientPromise from '../lib/mongodb';
+import ClientPromise from '../lib/mongodb';
 import { BlogPost } from '../types/BlogPost';
 
 export const fetchPostBySlug = async (slug: string): Promise<BlogPost | null> => {
-    const client = await clientPromise;
-    const db = client.db('blog');
+   
+    const client = await ClientPromise;
+    const db = client.db('blog'); // Now you can correctly call db method
     const document = await db.collection('posts').findOne({ slug });
 
     if (!document) {
-        return null; // No post found for the given slug
+        return null; 
     }
 
     // Convert MongoDB document to BlogPost type
