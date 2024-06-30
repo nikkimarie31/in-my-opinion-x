@@ -42,20 +42,22 @@ const Footer: React.FC = () => {
 
   return (
     <footer className={styles.footer}>
-      <div>
+      <div className={styles.footerContainer}>
+        <div>
         <h6>In My Opinion</h6>
-        <img src="/logo.png" alt="In My Opinion" style={{ width: '50px', height: 'auto' }} />
+        <img src="/logo.png" alt="In My Opinion" style={{ width: '50px', height: 'auto' }} className={styles.footerLogo} />
+        </div>
       </div>
-      <div>
-        <Link href="/">Home</Link>
-        <Link href="/blog">Blog</Link>
-        <Link href="/about">About</Link>
-        <Link href="/contact">Contact</Link>
-        <Link href="/credentials">Credentials</Link>
-        <Link href="/privacy">Privacy & Disclaimer</Link>
-        <Link href="/terms">Terms & Conditions</Link>
+      <div className={styles.footerLinks}>
+        <Link href="/" className={styles.footerLink}>Home</Link>
+        <Link href="/blog" className={styles.footerLink}>Blog</Link>
+        <Link href="/about" className={styles.footerLink}>About</Link>
+        <Link href="/contact" className={styles.footerLink}>Contact</Link>
+        <Link href="/credentials" className={styles.footerLink}>Credentials</Link>
+        <Link href="/privacy" className={styles.footerLink}>Privacy & Disclaimer</Link>
+        <Link href="/terms" className={styles.footerLink}>Terms & Conditions</Link>
       </div>
-      <div>
+      <div className={styles.footerSection}>
         <input 
           type="email" 
           placeholder="Your email" 
@@ -73,7 +75,7 @@ const Footer: React.FC = () => {
           <p style={{ color: isError ? 'red' : 'green' }}>{message}</p>
         )}
       </div>
-      <div>
+      <div className={styles.footerBottom}>
         © {new Date().getFullYear()} Your Company. All rights reserved.
       </div>
     </footer>

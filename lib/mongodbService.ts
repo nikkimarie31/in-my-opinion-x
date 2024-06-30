@@ -1,6 +1,5 @@
 // lib/mongodbService.ts
-
-import { MongoClient, ReadPreference } from 'mongodb';
+import { MongoClient } from 'mongodb';
 
 const dbName = 'blog';
 
@@ -24,7 +23,7 @@ class MongoDBService {
 
       const skip = (page - 1) * limit;
 
-      return await this.getCollection('blogPosts')
+      return await this.getCollection('posts')
         .find(query)
         .skip(skip)
         .limit(limit)

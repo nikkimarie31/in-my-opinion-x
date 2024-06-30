@@ -3,12 +3,10 @@ export type BlogPost = {
   title: string;
   excerpt: string;
   content: string;
-  category: string;
-  datePosted: Date;
+  category: string[];
+  datePosted: string;
   slug: string;
   images: string[]; 
   tags: string[];
   author: string;
 };
-
-  

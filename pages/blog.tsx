@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from '../styles/blog.module.css';
-import { fetchCategories } from '../utils/fetchCategories'; 
+import { fetchCategories } from '../utils/fetchCategories';
 import { BlogPost } from '../types/BlogPost';
 import { GetServerSideProps } from 'next';
 import { fetchBlogPosts } from '../utils/fetchBlogPosts';
@@ -29,21 +29,25 @@ export const getServerSideProps: GetServerSideProps<BlogProps> = async (context)
         const totalPosts = await db.collection('posts').countDocuments();
         const totalPages = Math.ceil(totalPosts / limit);
 
-        return { 
-            props: { 
-                initialPosts: posts, 
-                categories, 
-                totalPages 
-            } 
+        console.log("Fetched Posts:", posts);
+        console.log("Fetched Categories:", categories);
+
+
+        return {
+            props: {
+                initialPosts: posts,
+                categories,
+                totalPages
+            }
         };
     } catch (error) {
         console.error('Error in getServerSideProps:', error);
-        return { 
-            props: { 
-                initialPosts: [], 
-                categories: [], 
-                totalPages: 0 
-            } 
+        return {
+            props: {
+                initialPosts: [],
+                categories: [],
+                totalPages: 0
+            }
         };
     }
 };
@@ -54,13 +58,14 @@ const Blog: NextPage<BlogProps> = ({ initialPosts, categories, totalPages }) => 
     const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
 
     useEffect(() => {
+        console.log('Initial posts:', initialPosts);
         const fetchPosts = async () => {
             let url = `/api/posts?page=${currentPage}`;
             if (selectedCategory) {
                 url += `&category=${selectedCategory}`;
             }
             const response = await fetch(url);
-            const newPosts = await response.json();
+            const newPosts: BlogPost[] = await response.json();
             setPosts(newPosts);
         };
 
@@ -81,8 +86,8 @@ const Blog: NextPage<BlogProps> = ({ initialPosts, categories, totalPages }) => 
             <h1>In My Opinion Blog</h1>
             <div className={styles.categoryContainer}>
                 {categories.map((category, index) => (
-                    <button 
-                        key={index} 
+                    <button
+                        key={index}
                         className={styles.categoryButton}
                         onClick={() => handleCategoryClick(category)}
                     >
@@ -91,15 +96,19 @@ const Blog: NextPage<BlogProps> = ({ initialPosts, categories, totalPages }) => 
                 ))}
             </div>
             <div className={styles.postsContainer}>
-                {posts.map((post) => (
-                    <div key={post._id} className={styles.postPreview}>
-                        <h2>{post.title}</h2>
-                        <p>{post.excerpt}</p>
-                        <Link href={`/blog/${post.slug}`}>
-                            <a className={styles.readMoreLink}>Read More</a>
-                        </Link>
-                    </div>
-                ))}
+                {posts.length > 0 ? (
+                    posts.map((post) => (
+                        <div key={post._id} className={styles.postPreview}>
+                            <h2>{post.title}</h2>
+                            <p>{post.excerpt}</p>
+                            <Link href={`/blog/${post.slug}`}>
+                                <span className={styles.readMoreLink}>Read More</span>
+                            </Link>
+                        </div>
+                    ))
+                ) : (
+                    <p>No posts available.</p>
+                )}
             </div>
             <div className={styles.paginationContainer}>
                 {Array.from({ length: totalPages }, (_, index) => (

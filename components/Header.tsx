@@ -1,3 +1,4 @@
+// components/Header.tsx
 
 import React, { useState, FunctionComponent, useCallback } from 'react';
 import Link from 'next/link';
@@ -7,25 +8,21 @@ import styles from './styles/Header.module.css';
 
 const Header: FunctionComponent = () => {
     const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-    
 
-    const toggleDrawer = 
-    useCallback((open: boolean) => {
+    const toggleDrawer = useCallback((open: boolean) => {
         setDrawerOpen(open);
     }, []);
 
-
     return (
         <>
-            <AppBar position='static' style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', boxShadow: 'none', padding: '0 2rem' }} className={styles.toolbar}>
-                <Toolbar>
+            <AppBar position='static' className={styles.appBar}>
+                <Toolbar className={styles.toolbar}>
                     <IconButton edge='start' aria-label='Open menu' className={styles.menuButton} onClick={() => toggleDrawer(true)}>
                         <MenuIcon />
                     </IconButton>
                     <Typography className={styles.title} variant='h6'>
                         In My Opinion
                     </Typography>
-                   
                 </Toolbar>
             </AppBar>
             <Drawer

@@ -114,3 +114,50 @@ To deploy your local project to Vercel, push it to GitHub/GitLab/Bitbucket and [
 Alternatively, you can deploy using our template by clicking on the Deploy button below.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?project-name=with-mongodb&repository-name=with-mongodb&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-mongodb&integration-ids=oac_jnzmjqM10gllKmSrG0SGrHOH)
+
+
+
+Okay so i just took out replaced npm with yarn to give it another try.
+
+
+this is what it used to have in it {
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@mui/icons-material": "^5.15.0",
+    "@mui/material": "^5.15.0",
+    "mongodb": "^4.8.1",
+    "next": "^14.0.4",
+    "prismjs": "^1.29.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.159.0",
+    "yarn": "^1.22.21"
+  },
+  "devDependencies": {
+    "@types/node": "18.7.5",
+    "@types/prismjs": "^1.26.3",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.17",
+    "typescript": "^5.3.3",
+    "file-loader": "^6.2.0"
+  },
+  "browser": {
+    "child_process": false
+  }
+}
+im a little skepticle because chatgpt added a lot of different things and took out other stuff so we will see 
+
+Okay i switched it immediately back. I should have all of the backend and the everything done now. at least the foundation of it. I want to do a murder mystery type thing to where you choose where your story line goes and which one you choose depends on which blog it takes you to next 
+
+6-25-24 
+im running into a lot of errors while trying to build my website. Right now its with webpack and it trying to run a certain module while building it that its not supposed to. 

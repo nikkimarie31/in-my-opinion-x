@@ -1,6 +1,13 @@
+// next.config.js
 const path = require('path');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 module.exports = {
+  env: {
+    MONGODB_URI: process.env.MONGODB_URI,
+  },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
@@ -9,27 +16,13 @@ module.exports = {
         tls: false,
         dns: false,
         child_process: false,
-        timers: require.resolve('timers-browserify'),
       };
     }
 
     config.module.rules.push({
-      test: /\.(node|dll)$/,
-      loader: 'file-loader',
-      options: {
-        name: '[name].[ext]',
-        outputPath: 'static/',
-        publicPath: `/_next/static/`,
-      },
+      test: /\.node$/,
+      use: 'file-loader',
     });
-
-    if (isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        'zstd': path.resolve(__dirname, 'node_modules/@mongodb-js/zstd-win32-x64-msvc/zstd.win32-x64-msvc.node'),
-        'snappy': path.resolve(__dirname, 'node_modules/@napi-rs/snappy-win32-x64-msvc/snappy.win32-x64-msvc.node'),
-      };
-    }
 
     return config;
   },

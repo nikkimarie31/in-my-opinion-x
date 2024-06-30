@@ -1,21 +1,16 @@
 import { AppProps } from 'next/app';
-import clientPromise from '../lib/mongodb';
-import { MongoClient } from 'mongodb';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Header />
+      <Component {...pageProps} />
+      <Footer />
+    </>
+  );
 }
-
-MyApp.getInitialProps = async () => {
-  try {
-    const client: MongoClient = await clientPromise;
-    const db = client.db();
-    console.log('Connected to MongoDB:', db.databaseName);
-  } catch (e) {
-    console.error('Error connecting to MongoDB:', e);
-  }
-
-  return {};
-};
 
 export default MyApp;

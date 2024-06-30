@@ -8,6 +8,7 @@
   text-align: center;
   padding: 20px;
   position: relative;
+  width: 100%;
 }
 
 /* Adjustments for smaller screens */
@@ -18,32 +19,44 @@
     padding: 20px;
   }
 
-  .footer > div {
+  .footer>div {
     margin-bottom: 10px;
-    width: 100%; /* Full width for smaller screens */
-    max-width: 500px; /* Maximum width for elements */
+    width: 100%;
+    /* Full width for smaller screens */
+    max-width: 500px;
+    /* Maximum width for elements */
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
   }
 
   .footer img {
-    width: 80px; /* Smaller image size */
+    width: 80px;
+    /* Smaller image size */
   }
 
-  .footer h6, .footer a, .subscribeInput, .subscribeButton {
-    font-size: 0.9em; /* Smaller font size */
+  .footer h6,
+  .footer a,
+  .subscribeInput,
+  .subscribeButton {
+    font-size: 0.9em;
+    /* Smaller font size */
   }
 
-  .subscribeInput, .subscribeButton {
-    width: 100%; /* Full width for input and button */
-    margin: 5px 0; /* Adjust margins */
+  .subscribeInput,
+  .subscribeButton {
+    width: 100%;
+    /* Full width for input and button */
+    margin: 5px 0;
+    /* Adjust margins */
   }
 }
 
 
 @media (max-width: 480px) {
-  .footer h6, .footer a {
+
+  .footer h6,
+  .footer a {
     font-size: 0.8em;
   }
 
@@ -56,7 +69,7 @@
     max-width: 300px;
     margin: auto;
   }
-  
+
   .subscribeInput {
     max-width: 300px;
     margin: auto;
@@ -65,7 +78,8 @@
 
 
 .subscribeButton {
-  background-color: #32CD32; /* Neon green button */
+  background-color: #32CD32;
+  /* Neon green button */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -76,12 +90,14 @@
 .subscribeInput {
   padding: 10px;
   margin-right: 10px;
-  border: 2px solid #32CD32; /* Neon green border */
+  border: 2px solid #32CD32;
+  /* Neon green border */
   border-radius: 5px;
 }
 
 .footer a {
-  color: #32CD32; /* Neon green links */
+  color: #32CD32;
+  /* Neon green links */
 }
 
 .footer a:hover {
@@ -100,4 +116,51 @@
 .footer a {
   color: #32cd32;
   margin-right: 10px;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.footerSection {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px;
+  text-align: center;
+}
+
+.footerLogo {
+  text-align: left;
+  max-height: 50px;
+}
+
+.footerLinks {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footerLink {
+  color: #39ff14;
+  text-decoration: none;
+  padding: 0 10px;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+}
+
+.footerBottom {
+  margin-top: 20px;
+  font-size: 0.753em;
+  color: #aaa;
+
+}
+
+.footerLogo {
+  max-height: 50px;
+  text-align: left;
 }
